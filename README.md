@@ -18,7 +18,13 @@ https://data.cityofchicago.org/Transportation/Traffic-Crashes-People/u6pd-qa9d
 3. After examination of the confusion matrix and classification report for each model, it was determined that the optimal models to hone and delve deeper would be an XGBoost model and a Random Forest model.
 4. 
 
+## Analysis of Models
 
+## Findings
+
+## Recommendations
+
+## Future Work
 
 
 
