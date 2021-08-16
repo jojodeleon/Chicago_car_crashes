@@ -1,6 +1,6 @@
 ![pedro-lastra-Nyvq2juw4_o-unsplash (1)](https://user-images.githubusercontent.com/75818628/129616561-9e4b9e88-1bce-499f-89b1-88dc448d0dcc.jpg)
 # Chicago Traffic Accidents  
-Classification Models
+Classification Models  
 **Project Partners: Jojo de Leon and Harrison Gu
 
 ## Project objective: 
