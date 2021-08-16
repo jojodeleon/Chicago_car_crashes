@@ -1,7 +1,7 @@
 ![pedro-lastra-Nyvq2juw4_o-unsplash (1)](https://user-images.githubusercontent.com/75818628/129616561-9e4b9e88-1bce-499f-89b1-88dc448d0dcc.jpg)
 # Chicago Traffic Accidents  
 Classification Models  
-**Project Partners: Jojo de Leon and Harrison Gu
+**Project Partners: Jojo de Leon and Harrison Gu**
 
 ## Project objective: 
 Our aim is to investigate the factors of reported accidents in the city of Chicago to ascertain which features are more likely to lead to an accident that involves injury in order to aid the city of Chicago in allocating their limited ambulatory services.
