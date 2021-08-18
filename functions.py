@@ -2,6 +2,25 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
+from sklearn.linear_model import LogisticRegression
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import BaggingClassifier, RandomForestClassifier
+from sklearn.ensemble import AdaBoostClassifier, GradientBoostingClassifier
+from xgboost import XGBClassifier
+from sklearn.model_selection import GridSearchCV
+from sklearn.pipeline import Pipeline
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import plot_confusion_matrix, accuracy_score
+from sklearn.metrics import classification_report
+from imblearn.over_sampling import SMOTE
+from imblearn.under_sampling import RandomUnderSampler
+import warnings
+warnings.filterwarnings('ignore')
+
+
 
 #FUNCTIONS TO CHANGE INDIVIDUAL COLUMNS
 def speed_limit(rate):
@@ -111,9 +130,19 @@ def road_surface(condition):
         return 'OTHER'
 
     
-names = list(all_df.STREET_NAME.value_counts().sort_values()[1518:].index)
 def street_acc(name):
-    if name in names:
+    #60 busiest streets in Chicago with accident rate of 3750 or more
+    streets = ['HARRISON ST', 'VINCENNES AVE', 'CONGRESS PKWY', 'WASHINGTON BLVD', 'RACINE AVE', 'MARQUETTE RD', 'JACKSON BLVD',
+             'LINCOLN AVE', 'BROADWAY', 'PETERSON AVE', 'ELSTON AVE', 'WENTWORTH AVE', 'KOSTNER AVE', 'MONTROSE AVE', '71ST ST',
+             'LAKE ST', 'LARAMIE AVE', 'DIVERSEY AVE', 'OGDEN AVE', 'HARLEM AVE', 'LAWRENCE AVE', 'FOSTER AVE', 'LAKE SHORE DR',
+             'DEVON AVE', 'CERMAK RD', 'SHERIDAN RD', '95TH ST', '47TH ST', 'MILWAUKEE AVE', 'DIVISION ST', 
+             'DR MARTIN LUTHER KING JR DR', 'LAKE SHORE DR SB', 'ADDISON ST', 'LAKE SHORE DR NB', '79TH ST', 
+             'COTTAGE GROVE AVE', 'MADISON ST', 'CHICAGO AVE', 'ROOSEVELT RD', '63RD ST', 'FULLERTON AVE', 'BELMONT AVE', 
+             '87TH ST', 'ARCHER AVE', 'DAMEN AVE', 'CALIFORNIA AVE', 'IRVING PARK RD', 'CENTRAL AVE', 'GRAND AVE', 'CLARK ST',
+             'STONY ISLAND AVE', 'NORTH AVE', 'STATE ST', 'MICHIGAN AVE', 'KEDZIE AVE', 'HALSTED ST', 'ASHLAND AVE', 
+             'CICERO AVE', 'PULASKI RD', 'WESTERN AVE']
+
+    if name in streets:
         return 'HIGH ACCIDENT RATE'
     else:
         return 'LOW ACCIDENT RATE'
@@ -147,3 +176,48 @@ def primary(cause):
         return 'NOT DRIVER FAULT'
     else:
         return 'DRIVER FAULT'
+    
+    
+#FUNCTION FOR ITERATIVE MODEL RUNS
+def run_model(X_train, X_test, y_train, y_test, model, target_names, scale=False):
+    if scale:
+        ss = StandardScaler()
+        X_train_scaled = ss.fit_transform(X_train)
+        X_test_scaled = ss.transform(X_test)
+        model.fit(X_train_scaled, y_train)
+        y_train_pred = model.predict(X_train_scaled)
+        y_test_pred = model.predict(X_test_scaled)
+        print(plot_confusion_matrix(model, X_train, y_train, cmap=plt.cm.Blues))
+        print(classification_report(y_train, y_train_pred, target_names=target_names))
+        print(plot_confusion_matrix(model, X_test, y_test, cmap=plt.cm.Blues))
+        print(classification_report(y_test, y_test_pred, target_names=target_names))
+        print("Training Accuracy Score: {}".format(model.score(X_train, y_train)))
+        print("Testing Accuracy Score: {}".format(model.score(X_test, y_test)))
+        return model
+
+    model.fit(X_train, y_train)
+    y_train_pred = model.predict(X_train)
+    y_test_pred = model.predict(X_test)
+    
+    print(plot_confusion_matrix(model, X_train, y_train, cmap=plt.cm.Blues))
+    print(classification_report(y_train, y_train_pred, target_names=target_names))
+    print(plot_confusion_matrix(model, X_test, y_test, cmap=plt.cm.Blues))
+    print(classification_report(y_test, y_test_pred, target_names=target_names))
+    print("Training Accuracy Score: {}".format(model.score(X_train, y_train)))
+    print("Testing Accuracy Score: {}".format(model.score(X_test, y_test)))
+    return model
+
+#FUNCTION FOR OBTAIN AND GRAPSH FEATURE IMPORTANCES OF MODEL
+def feature_importances(model, X_train):
+    importance = model.feature_importances_
+    columns = list(X_train.columns)
+    df = pd.DataFrame(columns=['Feature', 'Importance'])
+    df['Feature'] = columns
+    df['Importance'] = importance
+    df_sorted = df.sort_values(by='Importance', ascending = False)
+    top_features = df_sorted['Feature'][0:12]
+    top_importances = df_sorted['Importance'][0:12]
+    
+    plt.barh(top_features, top_importances)
+    plt.title('Feature Importances')
+    plt.show()
