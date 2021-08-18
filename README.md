@@ -16,16 +16,24 @@ https://data.cityofchicago.org/Transportation/Traffic-Crashes-People/u6pd-qa9d
 1. The Crash Record ID, which was present in both datasets, was used to combine the two datasets. Initially, there were over 1.6 million accidents with 79 features for each accident to explore. We chose to concentrate on accidents in which at least one vehicle was a car.  As such, records pertaining to cyclists and pedestrians were eliminated. Furthermore, for the features we identified as relevant, any unknown or missing entry for a relevant feature within a record disqualified that record for use. Our models are based on 17 features of roughly 162 thousand accident records. 
 2. In order to establish the two best models to use for our data, we ran baseline, aka vanilla, models of the following types: Logistic Regression, K-Nearest Neighbors, Decision Tree, Bagged Tree, Random Forest, Ada Boost, Gradient Boost, and XGBoost. 
 3. After examination of the confusion matrix and classification report for each model, it was determined that the optimal models to hone and delve deeper would be an XGBoost model and a Random Forest model.
-4. 
+4. For each of these two models, we dove deeper and tried to optimize results by using GridSearch to find the best parameters, as well as SMOTE, to deal with class imbalances and Type II errors.
 
 ## Analysis of Models
+Random Forest: 
+-After using GridSearch, we found that the most optimal parameters were 'criterion' = 'gini', 'max_depth' = None, 'min_samples_leaf' = 3, and 'min_samples_split' = 10. This improved our accuracy score for training and testing data.
+-SMOTE helped remove some of the Type II errors, but it also created an overfitting issue, as training accuracy increased while testing accuracy decreased.
 
 ## Findings
+Random Forest:
+Our final model showed that the features with the highest impact were:
+AGE_TWENTIES (injury prone)
+DRIVER_FAULT (injury prone)
+AGE_EIGHTIES (no injury)
 
 ## Recommendations
 
 ## Future Work
-
+Explore other ways to improve injury classification, as the Precision, Recall, and F1 scores for injury in the testing group were substantially lower than those of no injury.
 
 
 
