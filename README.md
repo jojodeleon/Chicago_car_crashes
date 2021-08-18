@@ -22,7 +22,6 @@ https://data.cityofchicago.org/Transportation/Traffic-Crashes-People/u6pd-qa9d
 ### Random Forest:   
 * After using GridSearch, we found that the most optimal parameters were 'criterion' = 'gini', 'max_depth' = None, 'min_samples_leaf' = 3, and 'min_samples_split' = 10. This improved our accuracy score for training and testing data.  
 * SMOTE helped remove some of the Type II errors, but it also created an overfitting issue, as training accuracy increased while testing accuracy decreased.    
-<br>
 ### XGBoost:  
 * After using GridSearch, we found that the most optimal parameters were learning_rate = 0.2, max_depth = 7, min_child_weight = 2, n_estimators = 100, subsample = 0.7.
 * 
@@ -32,8 +31,7 @@ https://data.cityofchicago.org/Transportation/Traffic-Crashes-People/u6pd-qa9d
 Our final model showed that the features with the highest impact were:  
 * AGE_TWENTIES (injury prone)  
 * DRIVER_FAULT (injury prone)  
-* AGE_EIGHTIES (no injury)  
-<br> 
+* AGE_EIGHTIES (no injury)   
 ### XGBoost:  
 Our final model showed that the features with the highest impact were:  
 * AGE_EIGHTY OR OLDER
