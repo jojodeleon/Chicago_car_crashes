@@ -23,7 +23,7 @@ https://data.cityofchicago.org/Transportation/Traffic-Crashes-People/u6pd-qa9d
 * After using GridSearch, we found that the most optimal parameters were 'criterion' = 'gini', 'max_depth' = None, 'min_samples_leaf' = 3, and 'min_samples_split' = 10. This improved our accuracy score for training and testing data.  
 * SMOTE helped remove some of the Type II errors, but it also created an overfitting issue, as training accuracy increased while testing accuracy decreased.    
 ### XGBoost:  
-* After using GridSearch and using SMOTE on the data, we found that the most optimal parameters were learning_rate = 0.2, max_depth = 7, min_child_weight = 2, n_estimators = 100, subsample = 0.7.
+* After using GridSearch as well as SMOTE on the data, we found that the most optimal parameters were learning_rate = 0.2, max_depth = 7, min_child_weight = 2, n_estimators = 100, subsample = 0.7.
 * SMOTE helped to remove some of the Type II errors but also increased overfitting.
 
 ## Findings
@@ -39,10 +39,10 @@ Our final model showed that the features with the highest impact were:
 * CRASH_MONTH_2 - February
 
 ## Recommendations  
-Reallocation of funds for ambulatory services on a month to month basis to account for the months that have high rates of accidents.  
-A city-wide PSA drive to educate drivers as to the importance of being fit to drive before getting behind the wheel.  
-Require certain age groups - namely twenty-somethings - to attend driver's education courses at license renewals.  
-Shorter validation periods for licenses of drivers eighty years and older in order to regularly ascertain their fitness to drive.  
+* Reallocation of funds for ambulatory services on a month to month basis to account for the months that have high rates of accidents.  
+* A city-wide PSA drive to educate drivers as to the importance of being fit to drive before getting behind the wheel.  
+* Require certain age groups - namely twenty-somethings - to attend driver's education courses at license renewals.  
+* Shorter validation periods for licenses of drivers eighty years and older in order to regularly ascertain their fitness to drive.  
 
 ## Future Work
 ### Random Forest:
