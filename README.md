@@ -24,7 +24,9 @@ https://data.cityofchicago.org/Transportation/Traffic-Crashes-People/u6pd-qa9d
 * SMOTE helped remove some of the Type II errors, but it also created an overfitting issue, as training accuracy increased while testing accuracy decreased.    
 ### XGBoost:  
 * After using GridSearch as well as SMOTE on the data, we found that the most optimal parameters were learning_rate = 0.2, max_depth = 7, min_child_weight = 2, n_estimators = 100, subsample = 0.7.
-* SMOTE helped to remove some of the Type II errors but also increased overfitting.
+* SMOTE helped to remove some of the Type II errors but also increased overfitting.  
+
+![confmatrixXGB](https://user-images.githubusercontent.com/75818628/130001012-f7f0befd-6961-44d3-b5a4-97a1725bf724.png)
 
 ## Findings
 ### Random Forest:  
@@ -38,6 +40,8 @@ Our final model showed that the features with the highest impact were:
 * DRIVER_FAULT
 * CRASH_MONTH_2 - February
 
+![featimpXGB](https://user-images.githubusercontent.com/75818628/130000968-d8e6110c-9d7b-4318-b7cf-d66693643991.png)
+
 ## Recommendations  
 * Reallocation of funds for ambulatory services on a month to month basis to account for the months that have high rates of accidents.  
 * A city-wide PSA drive to educate drivers as to the importance of being fit to drive before getting behind the wheel.  
@@ -48,8 +52,8 @@ Our final model showed that the features with the highest impact were:
 ### Random Forest:
 Explore other ways to improve injury classification, as the Precision, Recall, and F1 scores for injury in the testing group were substantially lower than those of no injury.
 ### XGBoost:
-Utilize ensemble methods and a dimensionality reduction method to improve on model performace.  
-Request more indepth information on the physical condition of the driver as both the driver's condition as well as a driver being at fault for the accident are primary contributory factors in accidents.
+* Utilize ensemble methods and a dimensionality reduction method to improve on model performace.  
+* Request more indepth information on the physical condition of the driver as both the driver's condition as well as a driver being at fault for the accident are primary contributory factors in accidents.
 
 
 
