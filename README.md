@@ -19,18 +19,27 @@ https://data.cityofchicago.org/Transportation/Traffic-Crashes-People/u6pd-qa9d
 4. For each of these two models, we dove deeper and tried to optimize results by using GridSearch to find the best parameters, as well as SMOTE, to deal with class imbalances and Type II errors.
 
 ## Analysis of Models
-Random Forest: 
--After using GridSearch, we found that the most optimal parameters were 'criterion' = 'gini', 'max_depth' = None, 'min_samples_leaf' = 3, and 'min_samples_split' = 10. This improved our accuracy score for training and testing data.
--SMOTE helped remove some of the Type II errors, but it also created an overfitting issue, as training accuracy increased while testing accuracy decreased.
+### Random Forest:   
+* After using GridSearch, we found that the most optimal parameters were 'criterion' = 'gini', 'max_depth' = None, 'min_samples_leaf' = 3, and 'min_samples_split' = 10. This improved our accuracy score for training and testing data.  
+* SMOTE helped remove some of the Type II errors, but it also created an overfitting issue, as training accuracy increased while testing accuracy decreased.    
+### XGBoost:  
+* After using GridSearch, we found that the most optimal parameters were learning_rate = 0.2, max_depth = 7, min_child_weight = 2, n_estimators = 100, subsample = 0.7.
+* 
 
 ## Findings
-Random Forest:
-Our final model showed that the features with the highest impact were:
-AGE_TWENTIES (injury prone)
-DRIVER_FAULT (injury prone)
-AGE_EIGHTIES (no injury)
+### Random Forest:  
+Our final model showed that the features with the highest impact were:  
+* AGE_TWENTIES (injury prone)  
+* DRIVER_FAULT (injury prone)  
+* AGE_EIGHTIES (no injury)   
+### XGBoost:  
+Our final model showed that the features with the highest impact were:  
+* AGE_EIGHTY OR OLDER
+* DRIVER_FAULT
+* CRASH_MONTH_2 - February
 
-## Recommendations
+## Recommendations  
+
 
 ## Future Work
 Explore other ways to improve injury classification, as the Precision, Recall, and F1 scores for injury in the testing group were substantially lower than those of no injury.
